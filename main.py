@@ -66,12 +66,12 @@ async def getDailyCalories(customer_id: int):
     with db.engine.begin() as connection:
         sql = "SELECT daily_calories FROM goals WHERE customer_id = :customer_id"
         daily_calories = connection.execute(sqlalchemy.text(sql), 
-                                            [{"customer_id": customer_id}]).fetchone()
+                                            [{"customer_id": customer_id}]).fetchone()[0]
         
         sql = "SELECT COALESCE(SUM(calories), 0) FROM meal WHERE customer_id = :customer_id\
             AND DATE(time) = DATE('now')"
         calories = connection.execute(sqlalchemy.text(sql), 
-                                            [{"customer_id": customer_id}]).fetchone()
+                                            [{"customer_id": customer_id}]).fetchone()[0]
         
         calories_left = daily_calories - calories
     return {"calories_left" : calories_left}
