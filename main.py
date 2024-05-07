@@ -57,7 +57,7 @@ async def postMeal(meal: Meal, customer_id: int):
         
         result = connection.execute(sqlalchemy.text(sql), 
                                     [{"name": meal.name, "calories":meal.calories, 
-                                      "customer_id": customer_id}])
+                                      "customer_id": customer_id, "ingredient_id": 1}])
     return "OK"
 
 
