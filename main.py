@@ -47,7 +47,7 @@ async def postGoals(goal: Goal, customer_id: int):
 
 class Meal(BaseModel):
     name: str
-    calroies: int
+    calories: int
 
 @app.post("/meal/{customer_id}")
 async def postMeal(meal: Meal, customer_id: int):
@@ -56,7 +56,7 @@ async def postMeal(meal: Meal, customer_id: int):
             VALUES (:name, :calories, :customer_id, :ingredient_id)"
         
         result = connection.execute(sqlalchemy.text(sql), 
-                                    [{"name": meal.name, "calories":meal.calories, 
+                                    [{"name": meal.name, "calories": meal.calories, 
                                       "customer_id": customer_id, "ingredient_id": 1}])
     return "OK"
 
