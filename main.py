@@ -79,7 +79,7 @@ async def getDailyCalories(customer_id: int):
 @app.get("/meal/{customer_id}/day")
 async def getAllMeals(customer_id: int):
     with db.engine.begin() as connection:
-        sql = "SELECT name, calories, time, type, ingredient_id FROM meal WHERE custoemr_id = :customer_id"
+        sql = "SELECT name, calories, time, type, ingredient_id FROM meal WHERE customer_id = :customer_id"
         meals = connection.execute(sqlalchemy.text(sql), [{"customer_id": customer_id}]).fetchall()
 
         meal_list = []
